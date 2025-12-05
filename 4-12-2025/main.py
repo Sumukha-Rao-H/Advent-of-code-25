@@ -9,7 +9,25 @@ def part1(data):
     return res
 
 def part2(data):
-    pass
+    rows = len(data)
+    cols = len(data[0])
+    total_removed = 0
+
+    while True:
+        to_remove = []
+
+        for i in range(rows):
+            for j in range(cols):
+                if data[i][j] == '@' and access(i, j, data):
+                    to_remove.append((i, j))
+
+        if not to_remove:
+            return total_removed
+
+        for i, j in to_remove:
+            data[i][j] = '.'
+
+        total_removed += len(to_remove)
 
 def access(i, j, data):
     rows = len(data)
